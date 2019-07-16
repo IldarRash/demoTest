@@ -1,0 +1,37 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.apache.commons:commons-text:1.6'
+	implementation 'io.jsonwebtoken:jjwt-api:0.10.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.10.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.10.5'
+	
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.hsqldb:hsqldb'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
