@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.View.ExelViewResolver;
+import com.example.demo.view.ExelViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package com.example.demo.View;
+package com.example.demo.view;
 
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;

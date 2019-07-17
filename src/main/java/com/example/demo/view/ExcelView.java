@@ -1,4 +1,4 @@
-package com.example.demo.View;
+package com.example.demo.view;
 
 import com.example.demo.dto.ProductDto;
 import org.apache.poi.ss.usermodel.Row;
