@@ -7,6 +7,11 @@ management:
       exposure:
         include: '*'
 
+logging:
+  config: classpath:logback.xml
+
+info:
+  version: 1
 
 db:
   url: jdbc:postgresql://localhost:5433/postgres

@@ -29,9 +29,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
         resolver.setContentNegotiationManager(manager);
 
         List<ViewResolver> resolvers = new ArrayList<>();
-
         resolvers.add(excelViewResolver());
-
         resolver.setViewResolvers(resolvers);
         return resolver;
     }

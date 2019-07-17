@@ -16,7 +16,6 @@ public class ExelProductController {
 
     @GetMapping("/download")
     public String download(Model model) {
-
         model.addAttribute("products", productService.getLeftovers());
         return "";
     }
