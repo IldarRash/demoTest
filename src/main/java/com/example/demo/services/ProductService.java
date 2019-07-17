@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,21 +33,23 @@ public class ProductService {
 
     @Transactional
     public void createProduct(ProductDto productDto) {
-        Product product = new Product();
-        product.setBrand(productDto.getBrand());
-        product.setName(productDto.getName());
-        product.setPrice(productDto.getPrice());
-        product.setQuantity(productDto.getQuantity());
-        product.setIsDeleted(false);
-
-        productDao.save(product);
+        productDao.save(convertToProduct(productDto, true));
     }
 
     @Transactional
+    public ProductDto updateProduct(ProductDto productDto) {
+        return Optional.of(productDao.save(convertToProduct(productDto, false)))
+                       .map(ProductDto::new)
+                       .orElseThrow(RuntimeException::new);
+    }
+
+
+    @Transactional
     public void deleteProduct(Long id) {
-        Product product = productDao.findById(id).orElseThrow(RuntimeException::new);
+        /*Product product = productDao.findById(id).orElseThrow(RuntimeException::new);
         product.setIsDeleted(true);
-        productDao.save(product);
+        productDao.save(product);*/ //todo сделать на удаление через поле
+        productDao.deleteById(id);
     }
 
     public ProductDto findProduct(Long id) {
@@ -56,6 +59,21 @@ public class ProductService {
     }
 
     public List<ProductDto> getLeftovers() {
-        return new ArrayList<ProductDto>();
+        return productDao.findByQuantity().stream()
+                                          .map(ProductDto::new)
+                                          .collect(Collectors.toList());
+    }
+
+    private Product convertToProduct(ProductDto productDto, boolean create) {
+        Product product = new Product();
+        if (!create)
+            product.setId(productDto.getId());
+        product.setBrand(productDto.getBrand());
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setQuantity(productDto.getQuantity());
+        product.setIsDeleted(false);
+
+        return product;
     }
 }

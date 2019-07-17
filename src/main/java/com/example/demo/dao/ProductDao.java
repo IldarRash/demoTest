@@ -15,4 +15,9 @@ public interface ProductDao extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE (:name is null or p.name = :name) and" +
         " (:brand is null or p.brand = :brand)")
     List<Product> findByNameOrBrand(@Param("name") String name, @Param("brand") String brand);
+
+
+    @Query("SELECT p FROM Product p WHERE (p.quantity < 5)")
+    List<Product> findByQuantity();
+
 }
