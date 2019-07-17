@@ -21,6 +21,8 @@ public class ProductService {
     }
 
     public List<ProductDto> getProducts(ProductFilter productFilter) {
+
+
         return productDao.findByNameOrBrand(
                 productFilter.getName(),
                 productFilter.getBrand()).stream()

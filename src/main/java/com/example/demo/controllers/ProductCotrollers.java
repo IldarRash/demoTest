@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@RestController("rest/products/")
+@RestController
+@RequestMapping("rest/products/")
 public class ProductCotrollers {
 
     private final ProductService productService;
@@ -18,27 +19,27 @@ public class ProductCotrollers {
         this.productService = productService;
     }
 
-    @GetMapping(value = "/{id}/")
+    @GetMapping(path = "/{id}/")
     public ProductDto getProduct(@PathVariable Long id) {
         return productService.findProduct(id);
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(path = "/")
     public List<ProductDto> getProducts(ProductFilter filter) {
         return productService.getProducts(filter);
     }
 
-    @PostMapping("/")
+    @PostMapping(path = "/")
     public void createProduct(@RequestBody ProductDto productDto) {
         productService.createProduct(productDto);
     }
 
-    @DeleteMapping("/{id}/")
+    @DeleteMapping(path = "/{id}/")
     public void deleteMapping(@PathVariable Long id) {
         productService.deleteProduct(id);
     }
 
-    @GetMapping("/leftovers")
+    @GetMapping(path = "/leftovers")
     public List<ProductDto> getLeftovers() {
         return productService.getLeftovers();
     }
